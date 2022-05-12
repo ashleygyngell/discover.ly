@@ -25,14 +25,33 @@ A 7 day build time to create a full stack web application.
 - HTML5
 
 ## Installation 
+
 - Clone the repo from GitHub onto your machine.
 - Use yarn/npm to install all dependencies from the package.json file.
 
 ## Concept
 
+A Social Discovery app where users can post their favorite spots for sporting activities. 
+
+## Phase One (Day 1)
+
+**Concept, Wireframing, Pseudocoding**
+
+Our intial conversation revolved around a desire to build a social app that incorporated a mutual appreciation for outdoor activities and sketched up a wireframe that walked through a basic user story and visualized our mininum viable product. 
+
+We then spent some time working out the best way to use git branches for optimum version control and created tickets on a Trello board, pre defining all the tasks we needed to complete.
+
+Finally, we decided to work with an Agile methodology, to incorporate daily stand-ups and make the most of paired programming when needed. 
 
 
 
+# Wins 
+
+Both Tom and Elise, whilst being firm with their own ideas were incredibly easy to work with. 
+
+## Challenges
+
+Occasional merge conflicts. Good communication and working on the tasks and merging afterwards kept us on track! 
 
 
 ## The Build
