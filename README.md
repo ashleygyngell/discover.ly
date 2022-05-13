@@ -37,113 +37,74 @@ A Social Discovery app where users can post their favorite spots for sporting ac
 
 **Concept, Wireframing, Pseudocoding**
 
-Our intial conversation revolved around a desire to build a social app that incorporated a mutual appreciation for outdoor activities and sketched up a wireframe that walked through a basic user story and visualized our mininum viable product. 
+Our intial conversation revolved around a desire to build a social app that incorporated a mutual appreciation for outdoor activities. 
 
-We then spent some time working out the best way to use git branches for optimum version control and created tickets on a Trello board, pre defining all the tasks we needed to complete.
+Our first task was to sketch up a wireframe that walked through a basic user story and visualize our mininum viable product. We then spent some time working out the best way to use git branches for optimum version control and created tickets on a Trello board, pre defining all the tasks we needed to complete.
 
-Finally, we decided to work with an Agile methodology, to incorporate daily stand-ups and make the most of paired programming when needed. 
+Finally, we decided to work with an Agile methodology, to incorporate daily stand-ups and look for paired programming opportunities.
 
+## Phase Two (Day 2-4)
+
+**The Back End Build** 
+
+We worked through the Trello board tickets one at a time, focussing on the backend first. We wanted to make sure the majority of the back end was running correctly, to make the connection to the front end as seamless as possible. This involved creating controllers for the users, comments and spot creation. I took on the responsibility of the login and registration features as shown below in a code snippet from usersController.js.  
+
+```async function registerUser(req, res, next) {
+  try {
+    const searchedUser = req.body.username;
+    console.log(searchedUser);
+    const users = await User.findOne({ username: searchedUser });
+    console.log(users);
+    if (!req.body.username) {
+      return res.status(203).send({ message: 'Username Required' });
+    else if (users !== null) {
+      return res.status(203).send({ message: 'Username Already Exists' });
+```
+The async function used here contains an await expression that suspends execution until the returned promise is fulfiled. First it checks for an input, returning an 203 error if not detected. Then, if the user has input a username, it checks against information in the database, returning a 203 error if the username already exists. This process carries on through a variety of else if statements.
+
+For example, the next code snippet demonstrates the multiple use cases of regex for input validation when a user is registering a profile. These patterns represent a set of strings that check for certain conditions. This was crucial in avoiding a generic password input, nor a false email. Finally, the last section of the  code is where the user is created if all of the if statements are not applicable and the await expression is resolved with a creation of a user, passing in the request body. 
+    
+  ``` } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(req.body.email)
+    ) {
+      return res.status(203).send({ message: 'Email Invalid' });
+    } else if (
+      !/(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(req.body.password)
+    ) {
+      return res.status(203).send({
+        message:
+          'Password is not valid. Password must contain: 10 characters, 1 symbol and 1 number.',
+      });
+    } 
+    const user = await User.create(req.body);
+    return res.status(201).send({ message: 'success', user });
+  } catch (err) {
+    next(err);
+  }
+}
+``` 
+
+## Phase Three (Day 5-7)
+
+**The Front End Build**
+
+We built the majority of the front end by coding as a group, with the Bulma CSS framework handling most of the design process for us. We installed a few extra node packages for a word carousel and login/signup transition whilst incoprotating Cloudinary for our image uploads and leaflet for our Maps. 
 
 
 # Wins 
 
-Both Tom and Elise, whilst being firm with their own ideas were incredibly easy to work with. 
+- Working alongside Tom and Elise was a genuine delight. We were able to constructivley dissagree with each other on many aspects of the app but this made for an app that weaved all of our best ideas into one finished product. 
+- Our daily standups were incredibly useful and allowed us to flag any blockers that we could code as a group before working on our own tasks as the days went on. 
+- Every time we made a change/completed a task from the trello board, we made sure to commit and merge our changes. 
 
 ## Challenges
 
-Occasional merge conflicts. Good communication and working on the tasks and merging afterwards kept us on track! 
+- Speaking of merging, there was a rare merge conflict but we made sure to focus all our attention on resolving this and then we could move on quickly and avoid any issues down the line. Good communication and color coding the tasks we were completing made sure we avoided this issue for the most part. 
 
+- Working with Cloudinary for the first time proved incredibly challenging. As this was something none of us had experience with before, I reached out to one of our instructors who provided us with some clarity which, paired with the online documentation and youtube tutorials, made sure we could incorporate its functionality without draining too much productivity time. 
 
-## The Build
-* We were placed into groups of three. For us, it was alarmingly easy to come up with a concept for a project. We wanted to build something social, something that represented the different corners of England that we live in and something that would be flexible enough to be expanded upon should we reach our MVP in good time.
-* We came up with a social discovery app, where users can post their favourite running routes or hiking locations. Our MVP would be to post and upload pictures, and our stretch goals would include vital things like mapping (though important, we thought it could be a huge time-sink).
-* We worked in an Agile methodology, with daily stand ups and some pair programming when necessary. 
-* Primarily, we worked with version control through Git and on our own branches of the repository. Occasionally there were some merge conflicts, but these were generally avoided as we worked siloed into our own components or pre defined tasks that we would take from the Trello board.
+## Stretch Goals 
 
-```JavaScript
-const createComment = async (req, res, next) => {
-  try {
-    const spot = await Spot.findById(req.params.id);
-
-    if (!spot) {
-      return res.status(404).send({ message: 'Spot not found!' });
-    }
-
-    const newComment = { ...req.body, createdBy: req.currentUser._id };
-
-    spot.comments.push(newComment);
-    const savedSpot = await spot.save();
-
-    return res.status(201).json({ message: 'New comment created!', savedSpot });
-  } catch (err) {
-    next(err);
-  }
-};
-```
-
-One of our first priorities was to create endpoints for all our major user functionality like posting a location they’d discovered or uploading a comment or a picture. This is an endpoint that allows a user to post a comment.
-
-We first needed a way to interface between our Express functionality and the Mongo database. We used Mongoose which enabled us to easily perform CRUD operations on the correct collection in our database. 
-
-With Mongoose, we designed our schemas that allow us to store our data in a specific configuration. 
-
-```JavaScript
-const commentSchema = new mongoose.Schema(
-  {
-    text: { type: String, required: true, maxlength: 300 },
-    rating: { type: Number, required: true, min: 1, max: 5 },
-    createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-  },
-  { timestamps: true }
-);
-export default mongoose.model('Comment', commentsSchema);
-```
-
-Here we are telling Mongoose that the comment a user creates ::must have:: text, which is a string and has a max length of 300 characters, along with a rating between 1 and 5, a username and a time stamp.
-
-```javascript
-export const createComment = async (id, comment) => {
-  const options = {
-    method: 'POST',
-    url: `/api/spots/${id}/comments`,
-    data: comment,
-    headers: {
-      authorization: `Bearer ${window.sessionStorage.getItem('token')}`,
-    },
-  };
-  const { data } = await axios.request(options);
-
-  return data;
-};
-```
-
-In our front end, we accessed the endpoint with Axios, making sure to include a header with the authorisation token so that only a logged in user can make a comment. 
-
-```javascript
-const [user, setUser] = React.useState(null);
-
-  React.useEffect(() => {
-    const getData = async () => {
-      const user = await getUserById(createdBy);
-      setUser(user);
-    };
-
-    getData();
-  }, []);const [user, setUser] = React.useState(null);
-```
-
-Lastly, to implement the comment we used React useEffect to grab the data from the endpoint with an asynchronous function. We then used setState to update the HTML with the new data from the endpoint - in this case, a user comment.
-
-## Map function explanation ?????
-
-## Wins
-This was a huge step up in complexity from my previous hackathon project. I really enjoyed the project management aspect of this early on, deciphering what we needed to do as soon as possible for MVP and feeding back to our teachers in stand ups. 
-
-I also found it was great experiencing working in teams with a fuller understanding of version control and how to merge independent features together. We iterated extremely fast because of this and my teammates Elise and Ash came just as ready as I did every single day to smash the project. It was a really collaborative environment where we implemented as many ideas as we could think of.
-
-I personally am very proud of managing to get maps into the website, especially implementing the ‘pin’ functionality of Leaflet.js and customising it to include the logo I had designed. 
-
-## Stretch Goals
-As mentioned, we did iterate very quickly and managed to include most of our wishlist features. Something we didn’t manage to implement was a user bio that a user could update after registration. 
-
-c
+- Implementing a user bio
+- Whats near me function, using the users current coordinates. 
+- Fixing the state issue on the registration form. There is a progress bar that visualises progress for the user when registering. This works correctly if the user goes from one box to the other inputting their information. However, if the user inputs information into a box and then deletes the information, the progress bar still lights up as if this section has been 'completed' 
