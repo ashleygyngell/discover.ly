@@ -2,11 +2,13 @@
 
 This was my first group project on the Software Engineering course, built in collaboration with [Tom Riley](https://github.com/TomCRiley) and [Elise La Rooy](https://github.com/eliselarooy)
 
-![app-screenshot]
+![app-screenshot](https://res.cloudinary.com/dj7e2jadx/image/upload/v1654004396/Screenshot_2022-05-31_at_14.39.33_xyxv0g.png)
 
 ## Deployment 
 
 This app has been deployed via Heroku and Netlify and is available [here](https://discoverly.netlify.app/)
+
+Feel free to register as a user or use: **email:** demo@demo.com & **password:** Demo123!
 
 ## The Brief
 
@@ -42,6 +44,10 @@ Our intial conversation revolved around a desire to build a social app that inco
 Our first task was to sketch up a wireframe that walked through a basic user story and visualize our mininum viable product. We then spent some time working out the best way to use git branches for optimum version control and created tickets on a Trello board, pre defining all the tasks we needed to complete.
 
 Finally, we decided to work with an Agile methodology, to incorporate daily stand-ups and look for paired programming opportunities.
+
+![wireframe-screenshot](https://res.cloudinary.com/dj7e2jadx/image/upload/v1654004136/Screenshot_2022-05-31_at_14.34.13_eabnvx.png)
+
+![trello-screenshot](https://res.cloudinary.com/dj7e2jadx/image/upload/v1654004129/Screenshot_2022-05-31_at_14.34.53_voonus.png)
 
 ## Phase Two (Day 2-4)
 
@@ -108,3 +114,8 @@ We built the majority of the front end by coding as a group, with the Bulma CSS 
 - Implementing a user bio
 - Whats near me function, using the users current coordinates. 
 - Fixing the state issue on the registration form. There is a progress bar that visualises progress for the user when registering. This works correctly if the user goes from one box to the other inputting their information. However, if the user inputs information into a box and then deletes the information, the progress bar still lights up as if this section has been 'completed' 
+
+## Takeaways
+
+- Pair programming really gave me a sense of collective ownership and increased our flow/focus state whilst maintaining a good morale. 
+- Getting to grips with JWT and their relationship with a browser's local storage was really valuable for my confidence moving forward with a solo, full stack project on the horizon.
