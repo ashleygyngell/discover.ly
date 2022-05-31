@@ -1,18 +1,18 @@
 # Discoverly - Project 3 @ GA (General Assembly)
 
-This was my first group project on the Software Engineering course, built in collaboration with [Tom Riley](https://github.com/TomCRiley) and [Elise La Rooy](https://github.com/eliselarooy)
+This was my first group project on the Software Engineering course, built in collaboration with [Tom Riley](https://github.com/TomCRiley) and [Elise La Rooy](https://github.com/eliselarooy).
 
 ![app-screenshot](https://res.cloudinary.com/dj7e2jadx/image/upload/v1654004396/Screenshot_2022-05-31_at_14.39.33_xyxv0g.png)
 
 ## Deployment 
 
-This app has been deployed via Heroku and Netlify and is available [here](https://discoverly.netlify.app/)
+This app has been deployed via Heroku and Netlify and is available [here](https://discoverly.netlify.app/).
 
 The free servers on Heroku sleep when they are not in use, so please allow a few seconds for them to wake up! 
 
 Feel free to register as a user or use: **email:** `demo@demo.com` & **password:** `Demo123!`
 
-This Repo is for the backend only. The code for the frontend is available [here]
+This Repo is for the backend only. The code for the frontend is available [here](https://github.com/ashleygyngell/discover.ly_client).
 
 ## The Brief
 
