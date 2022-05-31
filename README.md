@@ -8,7 +8,9 @@ This was my first group project on the Software Engineering course, built in col
 
 This app has been deployed via Heroku and Netlify and is available [here](https://discoverly.netlify.app/)
 
-Feel free to register as a user or use: **email:** demo@demo.com & **password:** Demo123!
+Feel free to register as a user or use: **email:** `demo@demo.com` & **password:** `Demo123!`
+
+This Repo is for the backend only. The code for the frontend is available [here]
 
 ## The Brief
 
